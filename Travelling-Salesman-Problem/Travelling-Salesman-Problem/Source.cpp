@@ -5,7 +5,7 @@
 
 using namespace std;
 
-
+//O(n^2)
 int Genome::Rank(vector<int> input) {
 
 	int highest = 0;
@@ -20,6 +20,7 @@ int Genome::Rank(vector<int> input) {
 	return highest;
 }
 
+//O(n)
 double Genome::Evaluate(vector<vector<double>> connections) {
 	int pos = 0;
 	int lastPos = 0;
@@ -42,6 +43,25 @@ double Genome::Evaluate(vector<vector<double>> connections) {
 	return res;
 }
 
-//vector<vector<int>> SubCrossover(vector<vector<int>> a, vector<vector<int>> b) {
-//	
-//}
+//O(n^2)
+Genome SubCrossover(Genome a, Genome b) {
+	const int size = a.genes.size();
+	
+	vector<vector<int>> res(size, vector<int>(size,0));
+	vector<vector<int>>* temp;
+
+	for (size_t i = 0; i < size; i++)
+	{
+		for (size_t j = 0; j < size; j++)
+		{
+			temp = rand() % 2 == 0 ? &(a.genes) : &(b.genes);
+			res[i][j] = (*temp)[i][j];
+		}
+	}
+	return Genome(res);
+}
+
+//O(1)
+Genome::Genome(vector<vector<int>> a) {
+	genes = a;
+}
