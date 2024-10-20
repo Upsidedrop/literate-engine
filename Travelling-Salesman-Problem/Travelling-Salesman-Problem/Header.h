@@ -12,3 +12,4 @@ class Genome {
 };
 
 Genome SubCrossover(Genome a, Genome b);
+Genome AvCrossover(Genome a, Genome b);

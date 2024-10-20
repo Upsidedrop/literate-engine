@@ -65,3 +65,18 @@ Genome SubCrossover(Genome a, Genome b) {
 Genome::Genome(vector<vector<int>> a) {
 	genes = a;
 }
+
+//O(n^2)
+Genome AvCrossover(Genome a, Genome b) {
+	const int size = a.genes.size();
+
+	vector<vector<int>> res(size, vector<int>(size, 0));
+	for (size_t i = 0; i < size; i++)
+	{
+		for (size_t j = 0; j < size; j++)
+		{
+			res[i][j] = (a.genes[i][j] + b.genes[i][j]) / 2;
+		}
+	}
+	return Genome(res);
+}

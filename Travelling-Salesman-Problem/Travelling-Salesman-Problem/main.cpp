@@ -14,12 +14,12 @@ int main() {
 		{1,1,1,1}
 		});
 	Genome ma({
-		{2,2,2,2},
-		{2,2,2,2},
-		{2,2,2,2},
-		{2,2,2,2}
+		{15,15,15,15},
+		{15,15,15,15},
+		{15,15,15,15},
+		{15,15,15,15}
 		});
-	Genome x = SubCrossover(pa, ma);
+	Genome x = AvCrossover(pa, ma);
 	for (size_t i = 0; i < pa.genes.size(); i++)
 	{
 		for (size_t j = 0; j < pa.genes.size(); j++)
