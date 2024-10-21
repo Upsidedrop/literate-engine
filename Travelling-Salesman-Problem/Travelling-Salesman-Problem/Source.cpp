@@ -80,3 +80,8 @@ Genome AvCrossover(Genome a, Genome b) {
 	}
 	return Genome(res);
 }
+
+//O(1)
+void Genome::Mutate() {
+	genes[rand() % genes.size()][rand() % genes.size()] += (rand() % 2) * 2 - 1;
+}

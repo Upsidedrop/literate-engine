@@ -9,6 +9,7 @@ class Genome {
 		int Rank(vector<int> input);
 		double Evaluate(vector<vector<double>> connections);
 		Genome(vector<vector<int>> a);
+		void Mutate();
 };
 
 Genome SubCrossover(Genome a, Genome b);

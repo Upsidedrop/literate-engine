@@ -8,18 +8,19 @@ int main() {
 	srand(time(NULL));
 
 	Genome pa({
-		{1,1,1,1},
-		{1,1,1,1},
-		{1,1,1,1},
-		{1,1,1,1}
+		{4,4,4,4},
+		{4,4,4,4},
+		{4,4,4,4},
+		{4,4,4,4}
 		});
 	Genome ma({
-		{15,15,15,15},
-		{15,15,15,15},
-		{15,15,15,15},
-		{15,15,15,15}
+		{8,8,8,8},
+		{8,8,8,8},
+		{8,8,8,8},
+		{8,8,8,8}
 		});
-	Genome x = AvCrossover(pa, ma);
+	Genome x = SubCrossover(pa, ma);
+	x.Mutate();
 	for (size_t i = 0; i < pa.genes.size(); i++)
 	{
 		for (size_t j = 0; j < pa.genes.size(); j++)
