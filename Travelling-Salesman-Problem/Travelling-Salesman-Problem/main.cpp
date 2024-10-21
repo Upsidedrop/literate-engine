@@ -21,6 +21,12 @@ int main() {
 		{10}
 
 	};
-	cout << pa.Evaluate(costs);
-
+	Genome g;
+	for (size_t i = 0; i < g.genes.size(); i++)
+	{
+		for (int x : g.genes[i]) {
+			cout << x << " ";
+		}
+		cout << "\n";
+	}
 }

@@ -1,9 +1,11 @@
+#include "Header.h"
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include "Header.h"
 
 using namespace std;
+
+const int destinations = 4;
 
 //O(n)
 int Genome::Rank(vector<int> input) {
@@ -21,11 +23,10 @@ int Genome::Rank(vector<int> input) {
 }
 
 
-//O(n)
-double Genome::Evaluate(vector<vector<double>> connections) {
+//O(n) or O(n^2) depending on how you look at it
+void Genome::Evaluate(vector<vector<double>> connections) {
 	int pos = 0;
 	int lastPos = 0;
-	double res = 0;
 
 	int idKey = pow(2, connections.size()) - 1;
 
@@ -34,16 +35,15 @@ double Genome::Evaluate(vector<vector<double>> connections) {
 
 		if (pos < lastPos)
 		{
-			res += connections[pos][connections.size() - 1 - lastPos];
+			cost += connections[pos][connections.size() - 1 - lastPos];
 		}
 		else
 		{
-			res += connections[lastPos][connections.size() - 1 - pos];
+			cost += connections[lastPos][connections.size() - 1 - pos];
 		}
 		lastPos = pos;
 	}
-	res += connections[0][connections.size() - 1 - lastPos];
-	return res;
+	cost += connections[0][connections.size() - 1 - lastPos];
 }
 
 //O(n^2)
@@ -64,7 +64,21 @@ Genome SubCrossover(Genome a, Genome b) {
 	return Genome(res);
 }
 
-//O(1)
+//O(n^2)
+Genome::Genome() {
+	for (size_t i = 0; i < destinations; i++)
+	{
+		genes.push_back(vector<int>());
+		genes[i].push_back(0);
+		for (size_t j = 1; j < destinations; j++)
+		{
+			genes[i].push_back(j==i? 0 : rand() % 20 + 50);
+
+		}
+	}
+}
+
+//O(n)
 Genome::Genome(vector<vector<int>> a) {
 	genes = a;
 }

@@ -5,9 +5,11 @@ using namespace std;
 class Genome {
 	int usedIDs = 1;
 	public:
+		double cost = 0;
 		vector<vector<int>> genes;
 		int Rank(vector<int> input);
-		double Evaluate(vector<vector<double>> connections);
+		void Evaluate(vector<vector<double>> connections);
+		Genome();
 		Genome(vector<vector<int>> a);
 		void Mutate();
 };
