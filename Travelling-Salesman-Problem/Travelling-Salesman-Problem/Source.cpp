@@ -5,20 +5,21 @@
 
 using namespace std;
 
-//O(n^2)
+//O(n)
 int Genome::Rank(vector<int> input) {
-
 	int highest = 0;
 	for (size_t i = 1; i < input.size(); i++)
 	{
-		if (input[i] > input[highest] && find(usedIDs.begin(), usedIDs.end(), i) == usedIDs.end())
+		if (input[i] > input[highest] && (usedIDs & (1 << i)) != (1 << i))
 		{
 			highest = i;
 		}
 	}
-	usedIDs.push_back(highest);
+	usedIDs |= 1 << highest;
+	cout << highest << " ";
 	return highest;
 }
+
 
 //O(n)
 double Genome::Evaluate(vector<vector<double>> connections) {
@@ -26,7 +27,9 @@ double Genome::Evaluate(vector<vector<double>> connections) {
 	int lastPos = 0;
 	double res = 0;
 
-	while (usedIDs.size() < connections.size()) {
+	int idKey = pow(2, connections.size()) - 1;
+
+	while ((usedIDs & idKey) != idKey) {
 		pos = Rank(genes[pos]);
 
 		if (pos < lastPos)

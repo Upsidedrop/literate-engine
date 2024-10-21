@@ -3,7 +3,7 @@
 using namespace std;
 
 class Genome {
-	vector<int> usedIDs = {0};
+	int usedIDs = 1;
 	public:
 		vector<vector<int>> genes;
 		int Rank(vector<int> input);

@@ -8,26 +8,19 @@ int main() {
 	srand(time(NULL));
 
 	Genome pa({
-		{4,4,4,4},
-		{4,4,4,4},
-		{4,4,4,4},
-		{4,4,4,4}
+		{0,6,7,12},
+		{0,0,7,9},
+		{0,4,0,6},
+		{0,5,8,0}
 		});
-	Genome ma({
-		{8,8,8,8},
-		{8,8,8,8},
-		{8,8,8,8},
-		{8,8,8,8}
-		});
-	Genome x = SubCrossover(pa, ma);
-	x.Mutate();
-	for (size_t i = 0; i < pa.genes.size(); i++)
-	{
-		for (size_t j = 0; j < pa.genes.size(); j++)
-		{
-			cout << x.genes[i][j];
-		}
-		cout << "\n";
-	}
+
+	vector<vector<double>> costs = {
+		{1,2,3,4},
+		{5,6,7},
+		{8,9},
+		{10}
+
+	};
+	cout << pa.Evaluate(costs);
 
 }
