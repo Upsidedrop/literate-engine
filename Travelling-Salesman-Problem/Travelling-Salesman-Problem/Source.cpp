@@ -5,7 +5,20 @@
 
 using namespace std;
 
-const int destinations = 4;
+const int destinations = 10;
+
+vector<vector<double>> RandCosts() {
+	vector<vector<double>> res;
+	for (size_t i = 0; i < destinations; i++)
+	{
+		res.push_back(vector<double>());
+		for (size_t j = 0; j < destinations-i; j++)
+		{
+			res[i].push_back((double)(rand() % 50));
+		}
+	}
+	return res;
+}
 
 //O(n)
 int Genome::Rank(vector<int> input) {
@@ -18,7 +31,6 @@ int Genome::Rank(vector<int> input) {
 		}
 	}
 	usedIDs |= 1 << highest;
-	cout << highest << " ";
 	return highest;
 }
 

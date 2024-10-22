@@ -2,6 +2,8 @@
 
 using namespace std;
 
+vector<vector<double>> RandCosts();
+
 class Genome {
 	int usedIDs = 1;
 	public:

@@ -7,26 +7,27 @@ using namespace std;
 int main() {
 	srand(time(NULL));
 
-	Genome pa({
-		{0,6,7,12},
-		{0,0,7,9},
-		{0,4,0,6},
-		{0,5,8,0}
-		});
+	vector<vector<double>> costs = RandCosts();
 
-	vector<vector<double>> costs = {
-		{1,2,3,4},
-		{5,6,7},
-		{8,9},
-		{10}
-
-	};
-	Genome g;
-	for (size_t i = 0; i < g.genes.size(); i++)
-	{
-		for (int x : g.genes[i]) {
-			cout << x << " ";
+	vector<Genome> genomes;
+	vector<Genome> survivors;
+	double average = 0;
+	genomes.push_back(Genome());
+	genomes.push_back(Genome());
+	genomes.push_back(Genome());
+	genomes.push_back(Genome());
+	genomes.push_back(Genome());
+	genomes.push_back(Genome());
+	genomes.push_back(Genome());
+	for (Genome& g : genomes) {
+		g.Evaluate(costs);
+		average += g.cost;
+	}
+	average /= genomes.size();
+	for (Genome g : genomes) {
+		if (g.cost < average)
+		{
+			survivors.push_back(g);
 		}
-		cout << "\n";
 	}
 }
