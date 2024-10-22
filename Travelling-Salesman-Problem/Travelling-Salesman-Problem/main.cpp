@@ -4,30 +4,43 @@
 
 using namespace std;
 
+const int targetGenomes = 10;
+
 int main() {
 	srand(time(NULL));
 
 	vector<vector<double>> costs = RandCosts();
 
 	vector<Genome> genomes;
-	vector<Genome> survivors;
-	double average = 0;
-	genomes.push_back(Genome());
-	genomes.push_back(Genome());
-	genomes.push_back(Genome());
-	genomes.push_back(Genome());
-	genomes.push_back(Genome());
-	genomes.push_back(Genome());
-	genomes.push_back(Genome());
-	for (Genome& g : genomes) {
-		g.Evaluate(costs);
-		average += g.cost;
+	for (size_t i = 0; i < targetGenomes; i++)
+	{
+		genomes.push_back(Genome());
 	}
-	average /= genomes.size();
-	for (Genome g : genomes) {
-		if (g.cost < average)
+	for (size_t j = 0; j < 15; j++)
+	{
+		double average = 0;
+		for (Genome& g : genomes) {
+			g.Evaluate(costs);
+			average += g.cost;
+		}
+		average /= genomes.size();
+
+		vector<Genome> survivors;
+		for (Genome g : genomes) {
+			if (g.cost <= average)
+			{
+				survivors.push_back(g);
+			}
+		}
+		cout << average << "\n";
+		genomes.clear();
+		for (size_t i = 0; i < targetGenomes; i++)
 		{
-			survivors.push_back(g);
+			genomes.push_back(
+				SubCrossover
+				(survivors[rand() % survivors.size()],
+					survivors[rand() % survivors.size()]));
 		}
 	}
+
 }

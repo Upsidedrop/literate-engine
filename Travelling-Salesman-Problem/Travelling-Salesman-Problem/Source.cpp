@@ -5,8 +5,9 @@
 
 using namespace std;
 
-const int destinations = 10;
+const int destinations = 4;
 
+//O(n^2)
 vector<vector<double>> RandCosts() {
 	vector<vector<double>> res;
 	for (size_t i = 0; i < destinations; i++)
@@ -25,24 +26,23 @@ int Genome::Rank(vector<int> input) {
 	int highest = 0;
 	for (size_t i = 1; i < input.size(); i++)
 	{
-		if (input[i] > input[highest] && (usedIDs & (1 << i)) != (1 << i))
+		if (input[i] > input[highest] && !usedIDs[i])
 		{
 			highest = i;
 		}
 	}
-	usedIDs |= 1 << highest;
+	usedIDs[highest] = true;
 	return highest;
 }
 
 
-//O(n) or O(n^2) depending on how you look at it
+//O(n^2)
 void Genome::Evaluate(vector<vector<double>> connections) {
 	int pos = 0;
 	int lastPos = 0;
-
-	int idKey = pow(2, connections.size()) - 1;
-
-	while ((usedIDs & idKey) != idKey) {
+	usedIDs = vector<bool>(destinations);
+	usedIDs[0] = true;
+	for (int i = 0; i < destinations; i++) {
 		pos = Rank(genes[pos]);
 
 		if (pos < lastPos)
@@ -63,14 +63,12 @@ Genome SubCrossover(Genome a, Genome b) {
 	const int size = a.genes.size();
 	
 	vector<vector<int>> res(size, vector<int>(size,0));
-	vector<vector<int>>* temp;
 
 	for (size_t i = 0; i < size; i++)
 	{
 		for (size_t j = 0; j < size; j++)
 		{
-			temp = rand() % 2 == 0 ? &(a.genes) : &(b.genes);
-			res[i][j] = (*temp)[i][j];
+			res[i][j] = rand() % 2 == 0 ? a.genes[i][j] : b.genes[i][j];
 		}
 	}
 	return Genome(res);
