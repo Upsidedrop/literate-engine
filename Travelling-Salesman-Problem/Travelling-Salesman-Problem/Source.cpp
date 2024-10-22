@@ -90,7 +90,16 @@ Genome::Genome() {
 
 //O(n)
 Genome::Genome(vector<vector<int>> a) {
-	genes = a;
+	for (size_t i = 0; i < destinations; i++)
+	{
+		genes.push_back(vector<int>());
+		genes[i].push_back(0);
+		for (size_t j = 1; j < destinations; j++)
+		{
+			genes[i].push_back(j == i ? 0 : a[i][j]);
+
+		}
+	}
 }
 
 //O(n^2)
@@ -110,5 +119,8 @@ Genome AvCrossover(Genome a, Genome b) {
 
 //O(1)
 void Genome::Mutate() {
-	genes[rand() % genes.size()][rand() % genes.size()] += (rand() % 2) * 2 - 1;
+	for (size_t i = 0; i < (rand() % destinations); i++)
+	{
+		genes[rand() % genes.size()][rand() % genes.size()] += (rand() % 41) * 2 - 40;
+	}
 }

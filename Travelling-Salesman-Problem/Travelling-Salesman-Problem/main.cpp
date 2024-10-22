@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const int targetGenomes = 10;
+const int targetGenomes = 100;
 
 int main() {
 	srand(time(NULL));
@@ -16,7 +16,7 @@ int main() {
 	{
 		genomes.push_back(Genome());
 	}
-	for (size_t j = 0; j < 15; j++)
+	for (size_t j = 0; j < 1000; j++)
 	{
 		double average = 0;
 		for (Genome& g : genomes) {
@@ -29,7 +29,7 @@ int main() {
 		for (Genome g : genomes) {
 			if (g.cost <= average)
 			{
-				survivors.push_back(g);
+				survivors.push_back(g); 
 			}
 		}
 		cout << average << "\n";
@@ -41,6 +41,7 @@ int main() {
 				(survivors[rand() % survivors.size()],
 					survivors[rand() % survivors.size()]));
 		}
+		////speciation may be necessary for this to be effective
+		genomes[rand() % targetGenomes].Mutate();
 	}
-
 }
