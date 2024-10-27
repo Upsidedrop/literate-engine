@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const int destinations = 4;
+const int destinations = 20;
 
 //O(n^2)
 vector<vector<double>> RandCosts() {

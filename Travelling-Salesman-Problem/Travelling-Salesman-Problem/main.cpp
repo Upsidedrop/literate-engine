@@ -10,13 +10,14 @@ int main() {
 	srand(time(NULL));
 
 	vector<vector<double>> costs = RandCosts();
-
+	reset:
 	vector<Genome> genomes;
 	for (size_t i = 0; i < targetGenomes; i++)
 	{
 		genomes.push_back(Genome());
 	}
-	for (size_t j = 0; j < 1000; j++)
+	release:
+	for (size_t j = 0; j < 100; j++)
 	{
 		double average = 0;
 		for (Genome& g : genomes) {
@@ -43,5 +44,22 @@ int main() {
 		}
 		////speciation may be necessary for this to be effective
 		genomes[rand() % targetGenomes].Mutate();
+	}
+	while (true) {
+		char input;
+		cout << "Continue? Y/N/R";
+		cin >> input;
+		if (toupper(input) == 89)
+		{
+			goto release;
+		}
+		if (toupper(input) == 82)
+		{
+			goto reset;
+		}
+		if (toupper(input) == 78)
+		{
+			return 0;
+		}
 	}
 }
