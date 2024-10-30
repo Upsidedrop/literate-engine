@@ -7,6 +7,7 @@ double Magnitude(vector<double> vec);
 vector<double> SubtractVector(vector<double> vec1, vector<double> vec2);
 double Distance(vector<double> vec1, vector<double> vec2);
 vector<vector<double>> RandCosts();
+vector<vector<double>> CostsFromVectors(vector<vector<double>> list);
 class Genome {
 	vector<bool> usedIDs;
 	public:

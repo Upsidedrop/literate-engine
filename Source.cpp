@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const int destinations = 20;
+int destinations = 20;
 Genome best;
 
 //O(n^2)
@@ -43,6 +43,7 @@ void Run(vector<vector<double>> costs, const int targetGenomes, const int iterat
 			if (g.cost <= average)
 			{
 				survivors.push_back(g); 
+				cout << g.cost << "\n";
 			}
 			if (g.cost < best.cost)
 			{
@@ -84,7 +85,7 @@ vector<double> SubtractVector(vector<double> vec1, vector<double> vec2){
 
 //O(1)
 double Distance(vector<double> vec1, vector<double> vec2){
-	return Magnitude(SubtractVector(vec1,vec2));
+	return round(Magnitude(SubtractVector(vec1,vec2)));
 }
 
 //O(n^2)
@@ -97,6 +98,26 @@ vector<vector<double>> RandCosts() {
 		{
 			res[i].push_back((double)(rand() % 50));
 		}
+	}
+	return res;
+}
+
+vector<vector<double>> CostsFromVectors(vector<vector<double>> list){
+	destinations = list.size();
+	vector<vector<double>> res;
+	for (int i = 0; i < destinations; i++)
+	{
+		vector<double> layer;
+		int j = destinations-1;
+		//No idea why I need this
+		bool temp = true;
+		while (temp)
+		{
+			layer.push_back(Distance(list[i],list[j]));
+			j--;
+			temp = j>=i;
+		}
+		res.push_back(layer);
 	}
 	return res;
 }

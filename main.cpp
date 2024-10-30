@@ -8,10 +8,14 @@ const int targetGenomes = 100;
 const int iterations = 100;
 
 int main() {
+	vector<vector<double>> inputs = {
+		{100,5},{55,40},{84,80},{25,49},{134,55},{20,41},{102,24},{11,12},{77,28}
+	};
 
+	vector<vector<double>> costs = CostsFromVectors(inputs);
 	srand(time(NULL));
 
-	vector<vector<double>> costs = RandCosts();
+	//vector<vector<double>> costs = RandCosts();
 
 	best.cost = 100000;
 
