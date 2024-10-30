@@ -64,12 +64,27 @@ void Run(vector<vector<double>> costs, const int targetGenomes, const int iterat
 	}
 }
 
+//O(1)
 double Magnitude(vector<double> vec){
 	double res = 0;
 	for(double val : vec){
 		res += val * val;
 	}
 	return sqrt(res);
+}
+
+//O(1)
+vector<double> SubtractVector(vector<double> vec1, vector<double> vec2){
+	for (size_t i = 0; i < vec1.size(); i++)
+	{
+		vec1[i] -= vec2[i];
+	}
+	return vec1;
+}
+
+//O(1)
+double Distance(vector<double> vec1, vector<double> vec2){
+	return Magnitude(SubtractVector(vec1,vec2));
 }
 
 //O(n^2)
