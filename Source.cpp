@@ -2,6 +2,7 @@
 //#include <algorithm>
 #include <iostream>
 #include <vector>
+#include <math.h>
 
 using namespace std;
 
@@ -61,6 +62,14 @@ void Run(vector<vector<double>> costs, const int targetGenomes, const int iterat
 		////speciation may be necessary for this to be effective
 		genomes[rand() % targetGenomes].Mutate();
 	}
+}
+
+double Magnitude(vector<double> vec){
+	double res = 0;
+	for(double val : vec){
+		res += val * val;
+	}
+	return sqrt(res);
 }
 
 //O(n^2)

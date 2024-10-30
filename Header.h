@@ -3,6 +3,7 @@
 
 using namespace std;
 
+double Magnitude(vector<double> vec);
 vector<vector<double>> RandCosts();
 class Genome {
 	vector<bool> usedIDs;

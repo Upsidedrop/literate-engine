@@ -8,6 +8,10 @@ const int targetGenomes = 100;
 const int iterations = 100;
 
 int main() {
+
+	cout << Magnitude({3,4,5,6}) << "\n";
+	return 0;
+
 	srand(time(NULL));
 
 	vector<vector<double>> costs = RandCosts();
