@@ -1,9 +1,9 @@
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
 vector<vector<double>> RandCosts();
-
 class Genome {
 	vector<bool> usedIDs;
 	public:
@@ -14,7 +14,11 @@ class Genome {
 		Genome();
 		Genome(vector<vector<int>> a);
 		void Mutate();
+		string ToString();
 };
 
 Genome SubCrossover(Genome a, Genome b);
 Genome AvCrossover(Genome a, Genome b);
+
+void Run(vector<vector<double>> costs, const int targetGenomes, const int iterations, vector<Genome>& genomes);
+extern Genome best;

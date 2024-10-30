@@ -1,11 +1,67 @@
 #include "Header.h"
-#include <algorithm>
+//#include <algorithm>
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
 const int destinations = 20;
+Genome best;
+
+//O(n^2)
+string Genome::ToString(){
+	string res = "0";
+	
+	usedIDs = vector<bool>(usedIDs.size(),false);
+	for (size_t i = 0; i < destinations; i++)
+	{
+		int pos = 0;
+		pos = Rank(genes[pos]);
+
+		res.append(" - ");
+		res.append(to_string(pos));
+	}
+
+
+	return res;
+}
+
+//O(n^2)
+void Run(vector<vector<double>> costs, const int targetGenomes, const int iterations, vector<Genome>& genomes){
+	for (size_t j = 0; j < iterations; j++)
+	{
+		double average = 0;
+		for (Genome& g : genomes) {
+			g.Evaluate(costs);
+			average += g.cost;
+		}
+		average /= genomes.size();
+
+		vector<Genome> survivors;
+		for (Genome g : genomes) {
+			if (g.cost <= average)
+			{
+				survivors.push_back(g); 
+			}
+			if (g.cost < best.cost)
+			{
+				best = g;
+			}
+			
+		}
+		cout << average << "\n";
+		genomes.clear();
+		for (size_t i = 0; i < targetGenomes; i++)
+		{
+			genomes.push_back(
+				SubCrossover
+				(survivors[rand() % survivors.size()],
+					survivors[rand() % survivors.size()]));
+		}
+		////speciation may be necessary for this to be effective
+		genomes[rand() % targetGenomes].Mutate();
+	}
+}
 
 //O(n^2)
 vector<vector<double>> RandCosts() {
